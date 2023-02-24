@@ -1,17 +1,16 @@
-import { useState } from "react";
+import { useState, } from "react";
+
+const Modal = ({ tutorial, onSave }) => {
+  const [title, setTitle] = useState(tutorial.title);
+  const [description, setDescription] = useState(tutorial.description);
 
 
+  const handleSave = async () => {
+    await onSave({ id: tutorial.id, title, description });
+    setTitle("");
+    setDescription("");
 
-const Modal = ({tutorial, onSave}) => {
-    const [title,setTitle] = useState(tutorial.title)
-    const [description, setDescription] = useState(tutorial.description)
-
-    const handleSave = async() => {
-        await onSave ({id:tutorial.id, title, description})
-        setTitle("")
-        setDescription("")
-    }
-
+  };
 
   return (
     <div
@@ -25,7 +24,7 @@ const Modal = ({tutorial, onSave}) => {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="exampleModalLabel">
-             Edit Tutorial
+              Edit Tutorial
             </h1>
             <button
               type="button"
@@ -38,7 +37,7 @@ const Modal = ({tutorial, onSave}) => {
             <form>
               <div className="mb-3">
                 <label htmlFor="title-input" className="form-label">
-                 Title:
+                  Title:
                 </label>
                 <input
                   type="text"
@@ -52,8 +51,11 @@ const Modal = ({tutorial, onSave}) => {
                 <label htmlFor="description-textarea" className="form-label">
                   Message:
                 </label>
-                <textarea className="form-control" id="description-textarea" value={description}
-                 onChange={e => setDescription(e.target.value)}
+                <textarea
+                  className="form-control"
+                  id="description-textarea"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
               </div>
             </form>
@@ -66,8 +68,11 @@ const Modal = ({tutorial, onSave}) => {
             >
               Close
             </button>
-            <button type="button" className="btn btn-primary" 
-            onClick={handleSave}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleSave}
+            >
               Send message
             </button>
           </div>

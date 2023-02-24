@@ -19,15 +19,23 @@ const TutorialList = ({tutorials, BASE_URL,takeTutorials}) => {
 
   const [selectedTutorial,setSelectedTutorial] = useState(null);
 
+
+
+
   const editTutorial= async (tutorial) => {
    setSelectedTutorial(tutorial)
   }
 
-const handleSave = async (updateTutorial) => {
-  await axios.put(`${BASE_URL}${updateTutorial.id}/`, updateTutorial)
-  await takeTutorials();
-  setSelectedTutorial(null)
+const updateTutorial =  async(i) => {
+  await axios.put (`${BASE_URL}${i.id}/`, i)
+  await takeTutorials()
 }
+
+// const handleSave = async (updateTutorial) => {
+//   await axios.put(`${BASE_URL}${updateTutorial.id}/`, updateTutorial)
+//   await takeTutorials();
+//   setSelectedTutorial(null)
+// }
 
 
   // const editTutorial = async (id) => {
@@ -81,10 +89,8 @@ const handleSave = async (updateTutorial) => {
         </tbody>
       </table>
     <Modal tutorial={editTutorialData}
-    onSave={async (updateTutorial) => {
-      await axios.put(`${BASE_URL}${updateTutorial.id}/`, updateTutorial)
-      await takeTutorials()
-    }} />
+          onSave= {updateTutorial}
+    />
     </div>
   )
 }
